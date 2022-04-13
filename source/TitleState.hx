@@ -34,7 +34,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import GameJolt.GameJoltAPI;
+import gamejolt.GameJoltAPI;
 import openfl.Assets;
 
 using StringTools;

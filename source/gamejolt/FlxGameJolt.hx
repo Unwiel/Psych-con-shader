@@ -3,7 +3,7 @@ Originally forked from Flixel-Addons FLxGameJolt.hx, tysm :3
 -tenta
 **/
 
-package;
+package gamejolt;
 
 import flash.display.Loader;
 import flash.display.BitmapData;
@@ -296,12 +296,12 @@ class FlxGameJolt
 			{
 				var argArray = arg.split("=");
 
-				if (argArray[0] == "gjapi_username")
+				if (argArray[0] == "FlxGameJolt_username")
 				{
 					_userName = argArray[1];
 				}
 
-				if (argArray[0] == "gjapi_token")
+				if (argArray[0] == "FlxGameJolt_token")
 				{
 					_userToken = argArray[1];
 				}
@@ -309,14 +309,14 @@ class FlxGameJolt
 			#elseif flash
 			var parameters = Lib.current.loaderInfo.parameters;
 
-			if (parameters.gjapi_username != null)
+			if (parameters.FlxGameJolt_username != null)
 			{
-				_userName = parameters.gjapi_username;
+				_userName = parameters.FlxGameJolt_username;
 			}
 
-			if (parameters.gjapi_token != null)
+			if (parameters.FlxGameJolt_token != null)
 			{
-				_userToken = parameters.gjapi_token;
+				_userToken = parameters.FlxGameJolt_token;
 			}
 			#end
 		}
@@ -977,7 +977,7 @@ class FlxGameJolt
 			argmap.set(argArray[0], argArray[1]);
 		}
 
-		if (argmap.exists("gjapi_username") && argmap.exists("gjapi_token"))
+		if (argmap.exists("FlxGameJolt_username") && argmap.exists("FlxGameJolt_token"))
 		{
 			return true;
 		}
@@ -989,7 +989,7 @@ class FlxGameJolt
 	{
 		#if flash
 		var parameters = Lib.current.loaderInfo.parameters;
-		if (parameters.gjapi_username != null && parameters.gjapi_token != null)
+		if (parameters.FlxGameJolt_username != null && parameters.FlxGameJolt_token != null)
 		{
 			return true;
 		}

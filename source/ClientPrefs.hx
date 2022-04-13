@@ -4,7 +4,7 @@ import flixel.FlxG;
 import flixel.util.FlxSave;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import GameJolt.GameJoltAPI;
+import gamejolt.GameJoltAPI;
 import Controls;
 
 class ClientPrefs {

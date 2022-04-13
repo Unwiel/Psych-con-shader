@@ -10,7 +10,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
-import GameJolt.GJToastManager;
+import gamejolt.GameJoltToastManager;
 
 class Main extends Sprite
 {
@@ -23,7 +23,7 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPS;
 
-	public static var gjToastManager:GJToastManager;
+	public static var gjToastManager:GameJoltToastManager;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -84,7 +84,7 @@ class Main extends Sprite
 		// the reason for this is we're going to be handling our own cache smartly
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
-		gjToastManager = new GJToastManager();
+		gjToastManager = new GameJoltToastManager();
 		addChild(gjToastManager);
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
