@@ -13,7 +13,7 @@ class FlxVideo extends FlxBasic {
 	#if VIDEOS_ALLOWED
 	public var finishCallback:Void->Void = null;
 	
-	#if desktop
+	#if !web
 	public static var video:MP4Handler;
 	#end
 
@@ -45,7 +45,7 @@ class FlxVideo extends FlxBasic {
 		});
 		netStream.play(name);
 
-		#elseif desktop
+		#else
 
 		video = new MP4Handler();
 		video.finishCallback = function()
@@ -55,7 +55,6 @@ class FlxVideo extends FlxBasic {
 		        }
 		}
 		video.playVideo(name);
-
 		#end
 	}
 	#end
