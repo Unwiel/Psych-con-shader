@@ -36,6 +36,7 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import gamejolt.GameJoltAPI;
 import openfl.Assets;
+import vlc.lib.LibVLC;
 
 using StringTools;
 typedef TitleData =
@@ -156,8 +157,7 @@ class TitleState extends MusicBeatState
 		
 		Highscore.load();
 
-		GameJoltAPI.connect();
-		GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
+		LibVLC.create();
 
 		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
