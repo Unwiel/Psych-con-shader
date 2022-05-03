@@ -34,7 +34,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import gamejolt.GameJoltAPI;
 import openfl.Assets;
 import vlc.lib.LibVLC;
 
