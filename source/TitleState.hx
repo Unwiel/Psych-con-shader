@@ -35,7 +35,6 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
-import vlc.lib.LibVLC;
 
 using StringTools;
 typedef TitleData =
@@ -155,8 +154,6 @@ class TitleState extends MusicBeatState
 		ClientPrefs.loadPrefs();
 		
 		Highscore.load();
-
-		LibVLC.create();
 
 		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
