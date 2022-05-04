@@ -46,13 +46,12 @@ class FlxVideo extends FlxBasic {
 		netStream.play(name);
 
 		#else
-
 		video = new VideoHandler();
 		video.finishCallback = function()
 		{
 			if (finishCallback != null){
-			        finishCallback();
-		        }
+				finishCallback();
+			}
 		}
 		video.playVideo(name);
 		#end
