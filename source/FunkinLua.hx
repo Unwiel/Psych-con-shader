@@ -1350,7 +1350,7 @@ class FunkinLua {
 					_virtualpad = new FlxVirtualPad(NONE, A);
 		            _virtualpad.alpha = 0.75;
                     _virtualpad.cameras = [(cam)];
-		            this.add(_virtualpad);
+		            _virtualpad.active = true;
 		
 				case 'A_B':
 				    _virtualpad = new FlxVirtualPad(NONE, A_B);
