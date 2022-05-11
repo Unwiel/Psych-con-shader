@@ -1349,7 +1349,7 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "addVirtualPad", function(buttons:String, camera:String) {
 		    var cam:FlxCamera = cameraFromString(camera);
-		    _pad = new FlxVirtualPad((buttons));
+		    _pad = new FlxVirtualPad(buttons);
 			_pad.alpha = 0.75;
 			_pad.cameras = [(cam)];
 			add(_pad);
