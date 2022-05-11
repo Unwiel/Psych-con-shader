@@ -56,7 +56,7 @@ class FunkinLua {
 	public var scriptName:String = '';
 	var gonnaClose:Bool = false;
 	var filters:Array<BitmapFilter> = [];
-	var _pad:android.FlxVirtualPad;
+	var _virtualpad:FlxVirtualPad;
 
 	public var accessedProps:Map<String, Dynamic> = null;
 	public function new(script:String) {
@@ -587,11 +587,11 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "PadButtonjustpressed", function(button:String) {
 			switch(button){
 				case 'A':
-					boobs = _pad.buttonA.justPressed;
+					_virtualpad.buttonA.justPressed;
 				case 'B':
-					boobs = _pad.buttonB.justPressed;
+					 _virtualpad.buttonB.justPressed;
 				case 'C':
-					boobs = _pad.buttonC.justPressed;
+					_virtualpad.buttonC.justPressed;
 			}
 			
 			
@@ -1347,22 +1347,22 @@ class FunkinLua {
 		    var cam:FlxCamera = cameraFromString(camera);
 		    switch(buttons){
 				case 'A':
-					_pad = new FlxVirtualPad(NONE, A);
-			        _pad.alpha = 0.75;
-			        _pad.cameras = [(cam)];
-			        add(_pad);
+					_virtualpad = new FlxVirtualPad(NONE, A);
+		            _virtualpad.alpha = 0.75;
+                    _virtualpad.cameras = [(cam)];
+		            add(_virtualpad);
 		
 				case 'A_B':
-				    _pad = new FlxVirtualPad(NONE, A_B);
-			        _pad.alpha = 0.75;
-			        _pad.cameras = [(cam)];
-			        add(_pad);
+				    _virtualpad = new FlxVirtualPad(NONE, A_B);
+		            _virtualpad.alpha = 0.75;
+                    _virtualpad.cameras = [(cam)];
+		            add(_virtualpad);
 				
 				case 'A_B_C':
-				    _pad = new FlxVirtualPad(NONE, A_B_C);
-			        _pad.alpha = 0.75;
-			        _pad.cameras = [(cam)];
-			        add(_pad);
+				    _virtualpad = new FlxVirtualPad(NONE, A_B_C);
+		            _virtualpad.alpha = 0.75;
+                    _virtualpad.cameras = [(cam) ];
+		            add(_virtualpad);
 			}
 		});
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
