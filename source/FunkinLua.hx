@@ -588,13 +588,13 @@ class FunkinLua {
 			   var boobs =  _pad.button.justPressed;
 			switch(button){
 				case 'A':
-					boobs = _pad.buttonA.justPressed
+					boobs = _pad.buttonA.justPressed;
 				case 'B':
-					boobs = _pad.buttonB.justPressed
+					boobs = _pad.buttonB.justPressed;
 				case 'C':
-					boobs = _pad.buttonC.justPressed
+					boobs = _pad.buttonC.justPressed;
 				case 'D':
-					boobs = _pad.buttonD.justPressed
+					boobs = _pad.buttonD.justPressed;
 			}
 			
 			
