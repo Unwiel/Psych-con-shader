@@ -585,7 +585,6 @@ class FunkinLua {
 			return boobs;
 		});
 		Lua_helper.add_callback(lua, "PadButtonjustpressed", function(button:String) {
-			   var boobs =  _pad.button.justPressed;
 			switch(button){
 				case 'A':
 					boobs = _pad.buttonA.justPressed;
@@ -593,12 +592,9 @@ class FunkinLua {
 					boobs = _pad.buttonB.justPressed;
 				case 'C':
 					boobs = _pad.buttonC.justPressed;
-				case 'D':
-					boobs = _pad.buttonD.justPressed;
 			}
 			
 			
-			return boobs;
 		});
 		Lua_helper.add_callback(lua, "mousePressed", function(button:String) {
 			var boobs = FlxG.mouse.pressed;
@@ -1362,8 +1358,8 @@ class FunkinLua {
 			        _pad.cameras = [(cam)];
 			        add(_pad);
 				
-				case 'A_B_D':
-				    _pad = new FlxVirtualPad(NONE, A_B_D);
+				case 'A_B_C':
+				    _pad = new FlxVirtualPad(NONE, A_B_C);
 			        _pad.alpha = 0.75;
 			        _pad.cameras = [(cam)];
 			        add(_pad);
