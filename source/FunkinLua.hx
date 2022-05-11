@@ -1349,10 +1349,25 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "addVirtualPad", function(buttons:String, camera:String) {
 		    var cam:FlxCamera = cameraFromString(camera);
-		    _pad = new FlxVirtualPad(buttons);
-			_pad.alpha = 0.75;
-			_pad.cameras = [(cam)];
-			add(_pad);
+		    switch(buttons){
+				case 'A':
+					_pad = new FlxVirtualPad(NONE, A);
+			        _pad.alpha = 0.75;
+			        _pad.cameras = [(cam)];
+			        add(_pad);
+		
+				case 'A_B':
+				    _pad = new FlxVirtualPad(NONE, A_B);
+			        _pad.alpha = 0.75;
+			        _pad.cameras = [(cam)];
+			        add(_pad);
+				
+				case 'A_B_D':
+				    _pad = new FlxVirtualPad(NONE, A_B_D);
+			        _pad.alpha = 0.75;
+			        _pad.cameras = [(cam)];
+			        add(_pad);
+			}
 		});
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
 			if(tag != null && tag.length > 0) {
