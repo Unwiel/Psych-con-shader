@@ -37,7 +37,7 @@ import sys.io.File;
 import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
-import ui.FlxVirtualPad;
+import android.FlxVirtualPad;
 
 #if desktop
 import Discord;
@@ -56,7 +56,7 @@ class FunkinLua {
 	public var scriptName:String = '';
 	var gonnaClose:Bool = false;
 	var filters:Array<BitmapFilter> = [];
-	var _pad:ui.FlxVirtualPad;
+	var _pad:android.FlxVirtualPad;
 
 	public var accessedProps:Map<String, Dynamic> = null;
 	public function new(script:String) {
