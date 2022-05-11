@@ -54,6 +54,7 @@ class FunkinLua {
 	public var camTarget:FlxCamera;
 	public var scriptName:String = '';
 	var gonnaClose:Bool = false;
+	var filters:Array<BitmapFilter> = [];
 
 	public var accessedProps:Map<String, Dynamic> = null;
 	public function new(script:String) {
