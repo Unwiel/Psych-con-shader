@@ -37,6 +37,7 @@ import sys.io.File;
 import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
+import ui.FlxVirtualPad;
 
 #if desktop
 import Discord;
@@ -55,6 +56,7 @@ class FunkinLua {
 	public var scriptName:String = '';
 	var gonnaClose:Bool = false;
 	var filters:Array<BitmapFilter> = [];
+	var _pad:ui.FlxVirtualPad;
 
 	public var accessedProps:Map<String, Dynamic> = null;
 	public function new(script:String) {
@@ -577,6 +579,22 @@ class FunkinLua {
 					boobs = FlxG.mouse.justPressedMiddle;
 				case 'right':
 					boobs = FlxG.mouse.justPressedRight;
+			}
+			
+			
+			return boobs;
+		});
+		Lua_helper.add_callback(lua, "PadButtonjustpressed", function(button:String) {
+			   var boobs =  _pad.button.justPressed;
+			switch(button){
+				case 'A':
+					boobs = _pad.buttonA.justPressed
+				case 'B':
+					boobs = _pad.buttonB.justPressed
+				case 'C':
+					boobs = _pad.buttonC.justPressed
+				case 'D':
+					boobs = _pad.buttonD.justPressed
 			}
 			
 			
@@ -1328,6 +1346,13 @@ class FunkinLua {
 		    (cam).filtersEnabled = true;
 			filters.push(ShadersHandler.chromaticAberration);
 			ShadersHandler.setChrome(intense / 1000);
+		});
+		Lua_helper.add_callback(lua, "addVirtualPad", function(buttons:String, camera:String) {
+		    var cam:FlxCamera = cameraFromString(camera);
+		    _pad = new FlxVirtualPad((buttons));
+			_pad.alpha = 0.75;
+			_pad.cameras = [(cam)];
+			add(_pad);
 		});
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
 			if(tag != null && tag.length > 0) {
