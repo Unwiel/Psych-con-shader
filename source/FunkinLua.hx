@@ -1350,19 +1350,19 @@ class FunkinLua {
 					_virtualpad = new FlxVirtualPad(NONE, A);
 		            _virtualpad.alpha = 0.75;
                     _virtualpad.cameras = [(cam)];
-		            this.add(_virtualPad);
+		            this.add(_virtualpad);
 		
 				case 'A_B':
 				    _virtualpad = new FlxVirtualPad(NONE, A_B);
 		            _virtualpad.alpha = 0.75;
                     _virtualpad.cameras = [(cam)];
-		            this.add(_virtualPad);
+		            this.add(_virtualpad);
 				
 				case 'A_B_C':
 				    _virtualpad = new FlxVirtualPad(NONE, A_B_C);
 		            _virtualpad.alpha = 0.75;
                     _virtualpad.cameras = [(cam) ];
-		            this.add(_virtualPad);
+		            this.add(_virtualpad);
 			}
 		});
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
