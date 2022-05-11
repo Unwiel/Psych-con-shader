@@ -28,6 +28,7 @@ import openfl.filters.BitmapFilter;
 import openfl.utils.Assets;
 import flixel.math.FlxMath;
 import flixel.util.FlxSave;
+import openfl.filters.ShaderFilter;
 import flixel.addons.transition.FlxTransitionableState;
 #if sys
 import sys.FileSystem;
@@ -1319,6 +1320,13 @@ class FunkinLua {
 		
 		Lua_helper.add_callback(lua, "playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {
 			FlxG.sound.playMusic(Paths.music(sound), volume, loop);
+		});
+		Lua_helper.add_callback(lua, "setChormeShader", function(intense:Float = 1, camera:String) {
+		    var cam:FlxCamera = cameraFromString(camera);
+		    (cam).setFilters(filters);
+		    (cam).filtersEnabled = true;
+			filters.push(ShadersHandler.chromaticAberration);
+			ShadersHandler.setChrome(intense / 1000);
 		});
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
 			if(tag != null && tag.length > 0) {
