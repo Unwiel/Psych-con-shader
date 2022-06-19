@@ -585,18 +585,7 @@ class FunkinLua extends MusicBeatState
 			
 			return boobs;
 		});
-		Lua_helper.add_callback(lua, "PadButtonjustpressed", function(button:String) {
-			switch(button){
-				case 'A':
-					_virtualpad.buttonA.justPressed;
-				case 'B':
-					 _virtualpad.buttonB.justPressed;
-				case 'C':
-					_virtualpad.buttonC.justPressed;
-			}
-			
-			
-		});
+		
 		Lua_helper.add_callback(lua, "mousePressed", function(button:String) {
 			var boobs = FlxG.mouse.pressed;
 			switch(button){
@@ -1344,28 +1333,21 @@ class FunkinLua extends MusicBeatState
 			filters.push(ShadersHandler.chromaticAberration);
 			ShadersHandler.setChrome(intense / 1000);
 		});
-		Lua_helper.add_callback(lua, "addVirtualPad", function(buttons:String, camera:String) {
-		    var cam:FlxCamera = cameraFromString(camera);
-		    switch(buttons){
-				case 'A':
-					_virtualpad = new FlxVirtualPad(NONE, A);
-		            _virtualpad.alpha = 0.75;
-                    _virtualpad.cameras = [(cam)];
-		            _virtualpad.active = true;
 		
-				case 'A_B':
-				    _virtualpad = new FlxVirtualPad(NONE, A_B);
-		            _virtualpad.alpha = 0.75;
-                    _virtualpad.cameras = [(cam)];
-		            _virtualpad.active = true;
-				
-				case 'A_B_C':
-				    _virtualpad = new FlxVirtualPad(NONE, A_B_C);
-		            _virtualpad.alpha = 0.75;
-                    _virtualpad.cameras = [(cam)];
-		            _virtualpad.active = true;
-			}
+		Lua_helper.add_callback(lua, "setChormeShader", function(intense:Float = 1, camera:String) {
+		    var cam:FlxCamera = cameraFromString(camera);
+		    (cam).setFilters(filters);
+		    (cam).filtersEnabled = true;
+			filters.push(ShadersHandler.chromaticAberration);
+			ShadersHandler.setChrome(intense / 1000);
 		});
+		
+		Lua_helper.add_callback(lua, "clearShader", function(camera:String) {
+		    var cam:FlxCamera = cameraFromString(camera);
+		    (cam).filtersEnabled = false;
+			ShadersHandler.setChrome(0 /0);
+		});
+		
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
 			if(tag != null && tag.length > 0) {
 				tag = tag.replace('.', '');
