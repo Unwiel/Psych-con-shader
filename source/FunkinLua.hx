@@ -45,7 +45,7 @@ import Discord;
 
 using StringTools;
 
-class FunkinLua extends MusicBeatState 
+class FunkinLua  
 {
 	public static var Function_Stop:Dynamic = #if android "Function_Stop" #else 1 #end;
 	public static var Function_Continue:Dynamic = #if android "Function_Continue" #else 0 #end;
