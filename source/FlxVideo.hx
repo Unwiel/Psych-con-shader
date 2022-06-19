@@ -4,7 +4,7 @@ import openfl.net.NetStream;
 import openfl.events.NetStatusEvent;
 import openfl.media.Video;
 #else
-import vlc.VideoHandler;
+import VideoHandler;
 #end
 import flixel.FlxBasic;
 import flixel.FlxG;
