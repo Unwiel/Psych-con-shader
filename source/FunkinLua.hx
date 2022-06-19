@@ -37,7 +37,7 @@ import sys.io.File;
 import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
-import android.FlxVirtualPad;
+
 
 #if desktop
 import Discord;
@@ -57,7 +57,7 @@ class FunkinLua extends MusicBeatState
 	public var scriptName:String = '';
 	var gonnaClose:Bool = false;
 	var filters:Array<BitmapFilter> = [];
-	var _virtualpad:FlxVirtualPad;
+	
 
 	public var accessedProps:Map<String, Dynamic> = null;
 	public function new(script:String) {
