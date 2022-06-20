@@ -38,14 +38,13 @@ import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
 
-
 #if desktop
 import Discord;
 #end
 
 using StringTools;
 
-class FunkinLua  
+class FunkinLua 
 {
 	public static var Function_Stop:Dynamic = #if android "Function_Stop" #else 1 #end;
 	public static var Function_Continue:Dynamic = #if android "Function_Continue" #else 0 #end;
@@ -57,7 +56,6 @@ class FunkinLua
 	public var scriptName:String = '';
 	var gonnaClose:Bool = false;
 	var filters:Array<BitmapFilter> = [];
-	
 
 	public var accessedProps:Map<String, Dynamic> = null;
 	public function new(script:String) {
@@ -1326,27 +1324,15 @@ class FunkinLua
 		Lua_helper.add_callback(lua, "playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {
 			FlxG.sound.playMusic(Paths.music(sound), volume, loop);
 		});
-		Lua_helper.add_callback(lua, "setChormeShader", function(intense:Float = 1, camera:String) {
+		Lua_helper.add_callback(lua, "setChormeShader", function(intense:Float = 1, idk:Float = 1, camera:String) {
 		    var cam:FlxCamera = cameraFromString(camera);
 		    (cam).setFilters(filters);
 		    (cam).filtersEnabled = true;
 			filters.push(ShadersHandler.chromaticAberration);
-			ShadersHandler.setChrome(intense / 1000);
+			ShadersHandler.setChrome(intense / idk);
 		});
 		
-		Lua_helper.add_callback(lua, "setChormeShader", function(intense:Float = 1, camera:String) {
-		    var cam:FlxCamera = cameraFromString(camera);
-		    (cam).setFilters(filters);
-		    (cam).filtersEnabled = true;
-			filters.push(ShadersHandler.chromaticAberration);
-			ShadersHandler.setChrome(intense / 1000);
-		});
 		
-		Lua_helper.add_callback(lua, "clearShader", function(camera:String) {
-		    var cam:FlxCamera = cameraFromString(camera);
-		    (cam).filtersEnabled = false;
-			ShadersHandler.setChrome(0 /0);
-		});
 		
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
 			if(tag != null && tag.length > 0) {
