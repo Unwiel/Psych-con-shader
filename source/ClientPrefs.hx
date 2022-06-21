@@ -31,6 +31,7 @@ class ClientPrefs {
 	public static var controllerMode:Bool = #if android true #else false #end;
 	public static var hitsoundVolume:Float = 0;
         public static var pauseMusic:String = 'Tea Time';
+        public static var shaders:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -125,7 +126,7 @@ class ClientPrefs {
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
-	
+	        FlxG.save.data.shaders = shaders;
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
@@ -206,6 +207,9 @@ class ClientPrefs {
 		if(FlxG.save.data.comboOffset != null) {
 			comboOffset = FlxG.save.data.comboOffset;
 		}
+                if(FlxG.save.data.shaders != null) {
+	                shaders = FlxG.save.data.shaders;
+                }
 		
 		if(FlxG.save.data.ratingOffset != null) {
 			ratingOffset = FlxG.save.data.ratingOffset;
