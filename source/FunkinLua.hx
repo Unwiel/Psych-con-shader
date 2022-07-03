@@ -38,7 +38,6 @@ import sys.io.File;
 import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
-import Shaders;
 
 #if desktop
 import Discord;
@@ -1151,13 +1150,7 @@ class FunkinLua
 				return;
 			}
 		
-			else if(PlayState.instance.modchartBackdrops.exists(obj)) {
-				var shit:ModchartBackdrop = PlayState.instance.modchartBackdrops.get(obj);
-				shit.scale.set(x, y);
-				if(updateHitbox) shit.updateHitbox();
-				return;
-			}
-
+			
 			var poop:FlxSprite = Reflect.getProperty(getInstance(), obj);
 			if(poop != null) {
 				poop.setGraphicSize(x, y);
@@ -1176,7 +1169,7 @@ class FunkinLua
 			else if(PlayState.instance.modchartBackdrops.exists(obj)) {
 				var shit:ModchartBackdrop = PlayState.instance.modchartBackdrops.get(obj);
 				shit.scale.set(x, y);
-				if(updateHitbox) shit.updateHitbox();
+				shit.updateHitbox();
 				return;
 			}
 
