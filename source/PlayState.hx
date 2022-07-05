@@ -9,6 +9,7 @@ import Song.SwagSong;
 import WiggleEffect.WiggleEffectType;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
+import flixel.addons.display.FlxBackdrop;
 import flixel.FlxG;
 import flixel.FlxGame;
 import openfl.filters.ShaderFilter;
@@ -54,7 +55,6 @@ import flixel.input.keyboard.FlxKey;
 import Note.EventNote;
 import openfl.events.KeyboardEvent;
 import flixel.util.FlxSave;
-import flixel.addons.display.FlxBackdrop; 
 import Achievements;
 import StageData;
 import FunkinLua;
@@ -219,6 +219,8 @@ class PlayState extends MusicBeatState
 	var grpLimoParticles:FlxTypedGroup<BGSprite>;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:BGSprite;
+	var xd1:FlxBackdrop;
+	var xd2:FlxBackdrop;
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -701,6 +703,23 @@ class PlayState extends MusicBeatState
 					bg.antialiasing = false;
 					add(bg);
 				}
+				case 'starved-pixel': 
+				    xd1 = new FlxBackdrop(Paths.image('starved/stardustBg'), 0.1, 0.1);
+					xd1.velocity.set(-50, 0);
+					xd1.lowestCamZoom = 0.6;
+					xd1.x = 800;
+					xd1.y = -800;
+					xd1.antialiasing = ClientPrefs.globalAntialiasing;
+					add(xd1);
+					
+					xd2 = new FlxBackdrop(Paths.image('starved/stardustBg'), 0.1, 0.1);
+					xd2.velocity.set(-50, 0);
+					xd2.lowestCamZoom = 0.6;
+					xd2.x = 800;
+					xd2.y = -1052;
+					xd2.antialiasing = ClientPrefs.globalAntialiasing;
+					add(xd2);
+					xd2.updateHitbox();
 		}
 
 		if(isPixelStage) {
