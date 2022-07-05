@@ -107,7 +107,7 @@ class Main extends Sprite
 		FlxG.mouse.visible = false;
 		#end
 
-                Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR);
+                Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 	}
 
         function onCrash(e:UncaughtErrorEvent):Void
