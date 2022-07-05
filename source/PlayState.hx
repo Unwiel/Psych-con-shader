@@ -705,21 +705,22 @@ class PlayState extends MusicBeatState
 				}
 				case 'starved-pixel': 
 				    xd1 = new FlxBackdrop(Paths.image('starved/stardustBg'), 0.1, 0.1);
-					xd1.velocity.set(-50, 0);
+					xd1.velocity.set(-350, 0);
 					xd1.lowestCamZoom = 0.6;
 					xd1.x = 800;
 					xd1.y = -800;
 					xd1.antialiasing = ClientPrefs.globalAntialiasing;
 					add(xd1);
 					
-					xd2 = new FlxBackdrop(Paths.image('starved/stardustBg'), 0.1, 0.1);
-					xd2.velocity.set(-50, 0);
+					xd2 = new FlxBackdrop(Paths.image('starved/stardustFloor'), 0.1, 0.1);
+					xd2.velocity.set(-350, 0);
 					xd2.lowestCamZoom = 0.6;
 					xd2.x = 800;
 					xd2.y = -1052;
+					xd2.updateHitbox();
 					xd2.antialiasing = ClientPrefs.globalAntialiasing;
 					add(xd2);
-					xd2.updateHitbox();
+					
 		}
 
 		if(isPixelStage) {
