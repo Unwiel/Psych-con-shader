@@ -104,12 +104,7 @@ class SUtil
 		}
 
 		errMsg += "\nUncaught Error: " + e.error;
-		#if MODS_ALLOWED
-		if (!FileSystem.exists(SUtil.getPath() + "crash/"))
-			FileSystem.createDirectory(SUtil.getPath() + "crash/");
-
-		File.saveContent(path, errMsg + "\n");
-		#end
+		
 
 		Sys.println(errMsg);
 
