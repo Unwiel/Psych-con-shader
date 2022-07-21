@@ -203,6 +203,7 @@ class PlayState extends MusicBeatState
 	var dialogueJson:DialogueFile = null;
 
 	var halloweenBG:BGSprite;
+	var sprite:FlxSprite;
 	var halloweenWhite:BGSprite;
 
 	var phillyCityLights:FlxTypedGroup<BGSprite>;
@@ -862,6 +863,8 @@ class PlayState extends MusicBeatState
 		boyfriendGroup.add(boyfriend);
 		startCharacterLua(boyfriend.curCharacter);
 		
+		sprite = new FlxSprite();
+		
 		var camPos:FlxPoint = new FlxPoint(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
 		if(gf != null)
 		{
@@ -1483,6 +1486,10 @@ class PlayState extends MusicBeatState
 		{
 		   video.playMP4(Paths.video("dwtd")), true, sprite, null, null, true);
 		   video.bitmap.seek(0.724 / 35);
+		    video.canvasWidth = 1280;
+           video.canvasHeight = 720;
+           video.fillScreen = true;
+           video.skippable = false;
 		}
 		else
 		{
