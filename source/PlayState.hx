@@ -62,6 +62,7 @@ import DialogueBoxPsych;
 #if sys
 import sys.FileSystem;
 #end
+import vlc.VideoHandler;
 
 
 using StringTools;

@@ -39,7 +39,7 @@ import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
 import Shaders;
-import VideoSprite;
+import vlc.VideoSprite;
 #if desktop
 import Discord;
 
@@ -1129,7 +1129,7 @@ class FunkinLua
 		
 		Lua_helper.add_callback(lua, "addLuaSpriteVideo", function(tag:String, front:Bool = false) {
 			if(PlayState.instance.modchartSprites.exists(tag)) {
-				var shit:ModchartSprite = PlayState.instance.modchartmp4Sprites.exists(tag);
+				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(tag);
 				if(!shit.wasAdded) {
 					if(front)
 					{
@@ -2320,17 +2320,7 @@ class ModchartSprite extends FlxSprite
 	}
 }
 
-class ModchartMp4Sprites extends VideoSprite
-{
-	public var wasAdded:Bool = false;
-	//public var isInFront:Bool = false;
 
-	public function new(?x:Float = 0, ?y:Float = 0)
-	{
-		super(x, y);
-		antialiasing = ClientPrefs.globalAntialiasing;
-	}
-}
 
 class ModchartText extends FlxText
 {
@@ -2342,6 +2332,18 @@ class ModchartText extends FlxText
 		cameras = [PlayState.instance.camHUD];
 		scrollFactor.set();
 		borderSize = 2;
+	}
+}
+
+class ModchartMp4Sprites extends VideoSprite
+{
+	public var wasAdded:Bool = false;
+	//public var isInFront:Bool = false;
+
+	public function new(?x:Float = 0, ?y:Float = 0)
+	{
+		super(x, y);
+		antialiasing = ClientPrefs.globalAntialiasing;
 	}
 }
 
