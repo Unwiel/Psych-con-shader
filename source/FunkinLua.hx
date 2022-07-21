@@ -974,11 +974,11 @@ class FunkinLua
 		
 		Lua_helper.add_callback(lua, "makeLuaSpriteVideo", function(tag:String, video:String, x:Float, y:Float, loop:Bool) {
 			tag = tag.replace('.', '');
-			resetSpriteTag(tag);
+			resetVideoSpriteTag(tag);
 			var leSprite:ModchartMp4Sprites = new ModchartMp4Sprites(x, y);
 			if(video != null && video.length > 0)
 			{
-				leSprite.playVideo(Paths.video(video));
+				leSprite.playVideo(Paths.video(video), loop);
 			}
 			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
 			PlayState.instance.modchartmp4Sprites.set(tag, leSprite);
@@ -1127,8 +1127,8 @@ class FunkinLua
 		});
 		
 		Lua_helper.add_callback(lua, "addLuaSpriteVideo", function(tag:String, front:Bool = false) {
-			if(PlayState.instance.modchartSprites.exists(tag)) {
-				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(tag);
+			if(PlayState.instance.modchartmp4Sprites.exists(tag)) {
+				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.get(tag);
 				if(!shit.wasAdded) {
 					if(front)
 					{
@@ -1212,7 +1212,7 @@ class FunkinLua
 				return;
 			}
 			else if(PlayState.instance.modchartmp4Sprites.exists(obj)) {
-				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(obj);
+				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.get(obj);
 				shit.scale.set(x, y);
 				shit.updateHitbox();
 				return;
@@ -1239,7 +1239,7 @@ class FunkinLua
 				return;
 			}
 			else if(PlayState.instance.modchartmp4Sprites.exists(obj)) {
-				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(obj);
+				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.get(obj);
 				shit.updateHitbox();
 				return;
 			}
@@ -1289,7 +1289,7 @@ class FunkinLua
 				return;
 			}
 			
-			var pee:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(tag);
+			var pee:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.get(tag);
 			if(destroy) {
 				pee.kill();
 			}
@@ -2052,6 +2052,20 @@ class FunkinLua
 		}
 		pee.destroy();
 		PlayState.instance.modchartSprites.remove(tag);
+	}
+	
+	function resetVideoSpriteTag(tag:String) {
+		if(!PlayState.instance.modchartmp4Sprites.exists(tag)) {
+			return;
+		}
+		
+		var pee:ModchartSprite = PlayState.instance.modchartmp4Sprites.get(tag);
+		pee.kill();
+		if(pee.wasAdded) {
+			PlayState.instance.remove(pee, true);
+		}
+		pee.destroy();
+		PlayState.instance.modchartmp4Sprites.remove(tag);
 	}
 	
 	function resetBackdropTag(tag:String) {
