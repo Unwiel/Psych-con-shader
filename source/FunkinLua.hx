@@ -976,9 +976,10 @@ class FunkinLua
 			tag = tag.replace('.', '');
 			resetVideoSpriteTag(tag);
 			var leSprite:ModchartMp4Sprites = new ModchartMp4Sprites(x, y);
+			var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + video + '.' + Paths.VIDEO_EXT); #else ''; #end
 			if(video != null && video.length > 0)
 			{
-				leSprite.playVideo(Paths.video(video), loop);
+				leSprite.playVideo(fileName, loop);
 			}
 			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
 			PlayState.instance.modchartmp4Sprites.set(tag, leSprite);
@@ -1087,6 +1088,11 @@ class FunkinLua
 			
 			else if(PlayState.instance.modchartBackdrops.exists(obj)) {
 				PlayState.instance.modchartBackdrops.get(obj).scrollFactor.set(scrollX, scrollY);
+				return;
+			}
+			
+			else if(PlayState.instance.modchartmp4Sprites.exists(obj)) {
+				PlayState.instance.modchartmp4Sprites.get(obj).scrollFactor.set(scrollX, scrollY);
 				return;
 			}
 
@@ -1336,7 +1342,7 @@ class FunkinLua
 				return true;
 			}
 			else if(PlayState.instance.modchartmp4Sprites.exists(obj)) {
-				PlayState.instance.modchartTexts.get(obj).cameras = [cameraFromString(camera)];
+				PlayState.instance.modchartmp4Sprites.get(obj).cameras = [cameraFromString(camera)];
 				return true;
 			}
 
@@ -1925,6 +1931,8 @@ class FunkinLua
 			if(PlayState.instance.modchartSprites.exists(tag)) {
 				PlayState.instance.modchartSprites.get(tag).scrollFactor.set(scrollX, scrollY);
 			}
+			
+			
 		});
 		Lua_helper.add_callback(lua, "scaleLuaSprite", function(tag:String, x:Float, y:Float) {
 			luaTrace("scaleLuaSprite is deprecated! Use scaleObject instead", false, true);
