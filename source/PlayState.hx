@@ -64,7 +64,7 @@ import sys.FileSystem;
 #end
 
 #if VIDEOS_ALLOWED
-import vlc.MP4Handler;
+import MP4Handler;
 #end
 
 using StringTools;
@@ -1477,11 +1477,16 @@ class PlayState extends MusicBeatState
 		}
 
 		var video:MP4Handler = new MP4Handler();
-		video.playVideo(filepath);
+		
 		
 		if (filepath == 'dwtd') // yo cuando
 		{
+		   video.playMP4(Paths.video("dwtd")), true, sprite, null, null, true);
 		   video.bitmap.seek(0.724 / 35);
+		}
+		else
+		{
+		    video.playMP4(Paths.video(filepath));
 		} 
 		video.finishCallback = function()
 		{
