@@ -978,7 +978,7 @@ class FunkinLua
 			var leSprite:ModchartMp4Sprites = new ModchartMp4Sprites(x, y);
 			if(video != null && video.length > 0)
 			{
-				leSprite.play(Paths.video(video));
+				leSprite.playVideo(Paths.video(video));
 			}
 			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
 			PlayState.instance.modchartmp4Sprites.set(tag, leSprite);
