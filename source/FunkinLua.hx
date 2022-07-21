@@ -976,7 +976,7 @@ class FunkinLua
 		Lua_helper.add_callback(lua, "makeLuaSpriteVideo", function(tag:String, video:String, x:Float, y:Float, loop:Bool) {
 			tag = tag.replace('.', '');
 			resetSpriteTag(tag);
-			var leSprite: = new ModchartMp4Sprites(x, y);
+			var leSprite:ModchartMp4Sprites = new ModchartMp4Sprites(x, y);
 			if(video != null && video.length > 0)
 			{
 				leSprite.play(Paths.video(video));
