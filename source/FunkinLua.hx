@@ -39,7 +39,6 @@ import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
 import Shaders;
-import vlc.VideoSprite;
 #if desktop
 import Discord;
 
