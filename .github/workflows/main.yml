@@ -182,6 +182,7 @@ jobs:
           haxelib install flixel-ui
           haxelib install hscript
           haxelib install flixel-addons
+          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec.git
           haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git --quiet
           haxelib install hxCodec
           haxelib git linc_luajit https://github.com/jigsaw-4277821/linc_luajit.git
