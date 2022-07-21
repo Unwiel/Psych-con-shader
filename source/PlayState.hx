@@ -1484,7 +1484,7 @@ class PlayState extends MusicBeatState
 		
 		if (filepath == 'dwtd') // yo cuando
 		{
-		   video.playMP4(Paths.video("dwtd")), true, sprite, null, null, true);
+		   video.playMP4(Paths.video("dwtd"), true, sprite, null, null, true);
 		   video.bitmap.seek(0.724 / 35);
 		    video.canvasWidth = 1280;
            video.canvasHeight = 720;
