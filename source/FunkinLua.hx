@@ -2059,7 +2059,7 @@ class FunkinLua
 			return;
 		}
 		
-		var pee:ModchartSprite = PlayState.instance.modchartmp4Sprites.get(tag);
+		var pee:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.get(tag);
 		pee.kill();
 		if(pee.wasAdded) {
 			PlayState.instance.remove(pee, true);
