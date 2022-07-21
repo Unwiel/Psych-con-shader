@@ -39,8 +39,10 @@ import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
 import Shaders;
+import VideoSprite;
 #if desktop
 import Discord;
+
 #end
 
 using StringTools;
@@ -970,6 +972,19 @@ class FunkinLua
 			PlayState.instance.modchartSprites.set(tag, leSprite);
 			leSprite.active = true;
 		});
+		
+		Lua_helper.add_callback(lua, "makeLuaSpriteVideo", function(tag:String, video:String, x:Float, y:Float, loop:Bool, ) {
+			tag = tag.replace('.', '');
+			resetSpriteTag(tag);
+			var leSprite: = new ModchartMp4Sprites(x, y);
+			if(video != null && video.length > 0)
+			{
+				leSprite.play(Paths.video(video));
+			}
+			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			PlayState.instance.modchartmp4Sprites.set(tag, leSprite);
+			leSprite.active = true;
+		});
 		Lua_helper.add_callback(lua, "makeAnimatedLuaSprite", function(tag:String, image:String, x:Float, y:Float, ?spriteType:String = "sparrow") {
 			tag = tag.replace('.', '');
 			resetSpriteTag(tag);
@@ -1112,6 +1127,37 @@ class FunkinLua
 			}
 		});
 		
+		Lua_helper.add_callback(lua, "addLuaSpriteVideo", function(tag:String, front:Bool = false) {
+			if(PlayState.instance.modchartSprites.exists(tag)) {
+				var shit:ModchartSprite = PlayState.instance.modchartmp4Sprites.exists(tag);
+				if(!shit.wasAdded) {
+					if(front)
+					{
+						getInstance().add(shit);
+					}
+					else
+					{
+						if(PlayState.instance.isDead)
+						{
+							GameOverSubstate.instance.insert(GameOverSubstate.instance.members.indexOf(GameOverSubstate.instance.boyfriend), shit);
+						}
+						else
+						{
+							var position:Int = PlayState.instance.members.indexOf(PlayState.instance.gfGroup);
+							if(PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup) < position) {
+								position = PlayState.instance.members.indexOf(PlayState.instance.boyfriendGroup);
+							} else if(PlayState.instance.members.indexOf(PlayState.instance.dadGroup) < position) {
+								position = PlayState.instance.members.indexOf(PlayState.instance.dadGroup);
+							}
+							PlayState.instance.insert(position, shit);
+						}
+					}
+					shit.wasAdded = true;
+					//trace('added a thing: ' + tag);
+				}
+			}
+		});
+		
 		Lua_helper.add_callback(lua, "addLuaBackdrop", function(tag:String, front:Bool = false) {
 			if(PlayState.instance.modchartBackdrops.exists(tag)) {
 				var shit:ModchartBackdrop = PlayState.instance.modchartBackdrops.get(tag);
@@ -1166,6 +1212,12 @@ class FunkinLua
 				shit.updateHitbox();
 				return;
 			}
+			else if(PlayState.instance.modchartmp4Sprites.exists(obj)) {
+				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(obj);
+				shit.scale.set(x, y);
+				shit.updateHitbox();
+				return;
+			}
 			else if(PlayState.instance.modchartBackdrops.exists(obj)) {
 				var shit:ModchartBackdrop = PlayState.instance.modchartBackdrops.get(obj);
 				shit.scale.set(x, y);
@@ -1184,6 +1236,11 @@ class FunkinLua
 		Lua_helper.add_callback(lua, "updateHitbox", function(obj:String) {
 			if(PlayState.instance.modchartSprites.exists(obj)) {
 				var shit:ModchartSprite = PlayState.instance.modchartSprites.get(obj);
+				shit.updateHitbox();
+				return;
+			}
+			else if(PlayState.instance.modchartmp4Sprites.exists(obj)) {
+				var shit:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(obj);
 				shit.updateHitbox();
 				return;
 			}
@@ -1228,6 +1285,27 @@ class FunkinLua
 			}
 		});
 		
+		Lua_helper.add_callback(lua, "removeLuaVideo", function(tag:String, destroy:Bool = true) {
+			if(!PlayState.instance.modchartmp4Sprites.exists(tag)) {
+				return;
+			}
+			
+			var pee:ModchartMp4Sprites = PlayState.instance.modchartmp4Sprites.exists(tag);
+			if(destroy) {
+				pee.kill();
+			}
+
+			if(pee.wasAdded) {
+				getInstance().remove(pee, true);
+				pee.wasAdded = false;
+			}
+
+			if(destroy) {
+				pee.destroy();
+				PlayState.instance.modchartmp4Sprites.exists(tag);
+			}
+		});
+		
 		Lua_helper.add_callback(lua, "removeLuaBackdrop", function(tag:String, destroy:Bool = true) {
 			if(!PlayState.instance.modchartBackdrops.exists(tag)) {
 				return;
@@ -1255,6 +1333,10 @@ class FunkinLua
 				return true;
 			}
 			else if(PlayState.instance.modchartTexts.exists(obj)) {
+				PlayState.instance.modchartTexts.get(obj).cameras = [cameraFromString(camera)];
+				return true;
+			}
+			else if(PlayState.instance.modchartmp4Sprites.exists(obj)) {
 				PlayState.instance.modchartTexts.get(obj).cameras = [cameraFromString(camera)];
 				return true;
 			}
@@ -2227,6 +2309,18 @@ class FunkinLua
 }
 
 class ModchartSprite extends FlxSprite
+{
+	public var wasAdded:Bool = false;
+	//public var isInFront:Bool = false;
+
+	public function new(?x:Float = 0, ?y:Float = 0)
+	{
+		super(x, y);
+		antialiasing = ClientPrefs.globalAntialiasing;
+	}
+}
+
+class ModchartMp4Sprites extends VideoSprite
 {
 	public var wasAdded:Bool = false;
 	//public var isInFront:Bool = false;

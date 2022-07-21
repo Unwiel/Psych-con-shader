@@ -63,9 +63,6 @@ import DialogueBoxPsych;
 import sys.FileSystem;
 #end
 
-#if VIDEOS_ALLOWED
-import MP4Handler;
-#end
 
 using StringTools;
 
@@ -90,6 +87,7 @@ class PlayState extends MusicBeatState
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
 	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
 	public var modchartBackdrops:Map<String, ModchartBackdrop> = new Map<String, ModchartBackdrop>();
+	public var modchartmp4Sprites:Map<String, ModchartMp4Sprites> = new Map<String, ModchartBackdrop>();
 	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
 	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
 	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
@@ -1479,22 +1477,13 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
-		var video:MP4Handler = new MP4Handler();
+		var video:VideoHandler = new MP4Handler();
 		
 		
-		if (filepath == 'dwtd') // yo cuando
-		{
-		   video.playMP4(Paths.video("dwtd"), true, sprite, null, null, true);
-		   video.bitmap.seek(0.724 / 35);
-		    video.canvasWidth = 1280;
-           video.canvasHeight = 720;
-           video.fillScreen = true;
-           video.skippable = false;
-		}
-		else
-		{
-		    video.playMP4(Paths.video(filepath));
-		} 
+		
+		
+		    video.playVideo(Paths.video(filepath));
+		 
 		video.finishCallback = function()
 		{
 			startAndEnd();
