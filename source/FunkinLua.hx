@@ -973,7 +973,7 @@ class FunkinLua
 			leSprite.active = true;
 		});
 		
-		Lua_helper.add_callback(lua, "makeLuaSpriteVideo", function(tag:String, video:String, x:Float, y:Float, loop:Bool, ) {
+		Lua_helper.add_callback(lua, "makeLuaSpriteVideo", function(tag:String, video:String, x:Float, y:Float, loop:Bool) {
 			tag = tag.replace('.', '');
 			resetSpriteTag(tag);
 			var leSprite: = new ModchartMp4Sprites(x, y);
