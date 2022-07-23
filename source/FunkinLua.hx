@@ -228,7 +228,7 @@ class FunkinLua
 			#if (!flash && MODS_ALLOWED && sys)
 			if(!PlayState.instance.runtimeShaders.exists(shader) && !initLuaShader(shader))
 			{
-				luaTrace('Shader $shader is missing!', false, false, FlxColor.RED);
+				
 				return false;
 			}
 
@@ -458,7 +458,7 @@ class FunkinLua
 					case 'Null Function Pointer', 'SReturn':
 						//nothing
 					default:
-						luaTrace(scriptName + ":" + lastCalledFunction + " - " + e, false, false, FlxColor.RED);
+						
 				}
 			}
 			
@@ -476,7 +476,7 @@ class FunkinLua
 				haxeInterp.variables.set(libName, Type.resolveClass(str + libName));
 			}
 			catch (e:Dynamic) {
-				luaTrace(scriptName + ":" + lastCalledFunction + " - " + e, false, false, FlxColor.RED);
+				
 			}
 			
 		});
@@ -2273,7 +2273,7 @@ class FunkinLua
 			if(!resultIsAllowed(lua, result))
 			{
 				Lua.pop(lua, 1);
-				if(error != null) luaTrace("ERROR (" + func + "): " + error, false, false, FlxColor.RED);
+				
 			}
 			else
 			{
@@ -2352,7 +2352,7 @@ class FunkinLua
 				}
 			}
 		}
-		luaTrace('Missing shader $name .frag AND .vert files!', false, false, FlxColor.RED);
+		
 		return false;
 	}
 	

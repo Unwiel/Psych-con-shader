@@ -61,10 +61,15 @@ import FunkinLua;
 import DialogueBoxPsych;
 #if sys
 import sys.FileSystem;
+import sys.io.File;
 #end
 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
+
+
+
+
 
 
 using StringTools;
