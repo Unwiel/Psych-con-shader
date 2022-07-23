@@ -2243,6 +2243,48 @@ class FunkinLua
 		return PlayState.instance.modchartTexts.exists(name) ? PlayState.instance.modchartTexts.get(name) : Reflect.getProperty(PlayState.instance, name);
 	}
 	
+	var lastCalledFunction:String = '';
+	public function call(func:String, args:Array<Dynamic>): Dynamic{
+		#if LUA_ALLOWED
+		if(closed) return Function_Continue;
+
+		lastCalledFunction = func;
+		try {
+			if(lua == null) return Function_Continue;
+
+			Lua.getglobal(lua, func);
+			var type:Int = Lua.type(lua, -1);
+			if (type != Lua.LUA_TFUNCTION) {
+				return Function_Continue;
+			}
+			
+			for(arg in args) {
+				Convert.toLua(lua, arg);
+			}
+
+			var result:Null<Int> = Lua.pcall(lua, args.length, 1, 0);
+			var error:Dynamic = getErrorMessage();
+			if(!resultIsAllowed(lua, result))
+			{
+				Lua.pop(lua, 1);
+				if(error != null) luaTrace("ERROR (" + func + "): " + error, false, false, FlxColor.RED);
+			}
+			else
+			{
+				var conv:Dynamic = cast getResult(lua, result);
+				Lua.pop(lua, 1);
+				if(conv == null) conv = Function_Continue;
+				return conv;
+			}
+			return Function_Continue;
+		}
+		catch (e:Dynamic) {
+			trace(e);
+		}
+		#end
+		return Function_Continue;
+	}
+	
 	public function getShader(obj:String):FlxRuntimeShader
 	{
 		var killMe:Array<String> = obj.split('.');
@@ -2273,8 +2315,7 @@ class FunkinLua
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/shaders/'));
 
-		for(mod in Paths.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/shaders/'));
+		
 		
 		for (folder in foldersToCheck)
 		{
