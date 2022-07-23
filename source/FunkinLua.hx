@@ -64,6 +64,7 @@ class FunkinLua
 	#end
 	public var camTarget:FlxCamera;
 	public var scriptName:String = '';
+	public var closed:Bool = false;
 	var gonnaClose:Bool = false;
 	var filters:Array<BitmapFilter> = [];
 	public static var haxeInterp:Interp = null;
@@ -2198,6 +2199,11 @@ class FunkinLua
 			luaTrace('musicFadeOut is deprecated! Use soundFadeOut instead.', false, true);
 		});
 		
+		Lua_helper.add_callback(lua, "close", function() {
+			closed = true;
+			return closed;
+		});
+		
 		call('onCreate', []);
 		#end
 	}
@@ -2349,6 +2355,20 @@ class FunkinLua
 		luaTrace('Missing shader $name .frag AND .vert files!', false, false, FlxColor.RED);
 		return false;
 	}
+	
+	function resultIsAllowed(leLua:State, leResult:Null<Int>) { //Makes it ignore warnings
+		var type:Int = Lua.type(leLua, leResult);
+		return type >= Lua.LUA_TNIL && type < Lua.LUA_TTABLE && type != Lua.LUA_TLIGHTUSERDATA;
+	}
+
+	function isErrorAllowed(error:String) {
+		switch(error)
+		{
+			case 'attempt to call a nil value' | 'C++ exception':
+				return false;
+		}
+		return true;
+	}
 
 	function getGroupStuff(leArray:Dynamic, variable:String) {
 		var killMe:Array<String> = variable.split('.');
@@ -2360,6 +2380,48 @@ class FunkinLua
 			return Reflect.getProperty(coverMeInPiss, killMe[killMe.length-1]);
 		}
 		return Reflect.getProperty(leArray, variable);
+	}
+	
+	function getErrorMessage() {
+		#if LUA_ALLOWED
+		var v:String = Lua.tostring(lua, -1);
+		if(!isErrorAllowed(v)) v = null;
+		return v;
+		#end
+	}
+
+	function getResult(l:State, result:Int):Any {
+		var ret:Any = null;
+
+		switch(Lua.type(l, result)) {
+			case Lua.LUA_TNIL:
+				ret = null;
+			case Lua.LUA_TBOOLEAN:
+				ret = Lua.toboolean(l, -1);
+			case Lua.LUA_TNUMBER:
+				ret = Lua.tonumber(l, -1);
+			case Lua.LUA_TSTRING:
+				ret = Lua.tostring(l, -1);
+		}
+		
+		return ret;
+	}
+	
+	public static function getVarInArray(instance:Dynamic, variable:String):Any
+	{
+		var shit:Array<String> = variable.split('[');
+		if(shit.length > 1)
+		{
+			var blah:Dynamic = Reflect.getProperty(instance, shit[0]);
+			for (i in 1...shit.length)
+			{
+				var leNum:Dynamic = shit[i].substr(0, shit[i].length - 1);
+				blah = blah[leNum];
+			}
+			return blah;
+		}
+
+		return Reflect.getProperty(instance, variable);
 	}
 
 	function loadFrames(spr:FlxSprite, image:String, spriteType:String)
