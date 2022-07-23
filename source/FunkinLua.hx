@@ -39,15 +39,16 @@ import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
 import Shaders;
-#if desktop
-import Discord;
 import flixel.system.FlxAssets.FlxShader;
 
 
 import flixel.addons.display.FlxRuntimeShader;
 
 import hscript.Parser;
-import hscript.Interp;
+import hscript.Interp; 
+#if desktop
+import Discord;
+
 
 #end
 
