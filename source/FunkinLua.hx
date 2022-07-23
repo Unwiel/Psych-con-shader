@@ -41,6 +41,10 @@ import DialogueBoxPsych;
 import Shaders;
 #if desktop
 import Discord;
+import flixel.system.FlxAssets.FlxShader;
+
+
+import flixel.addons.display.FlxRuntimeShader;
 
 import hscript.Parser;
 import hscript.Interp;
