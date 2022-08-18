@@ -2571,7 +2571,7 @@ class PlayState extends MusicBeatState
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
 		iconP1.updateHitbox();
 
-		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
+		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
 		iconP2.updateHitbox();
 
 		var iconOffset:Int = 26;
