@@ -141,15 +141,15 @@ class Character extends FlxSprite
 				}
 				
 				#if MODS_ALLOWED
-				var modAnimToFind:String = Paths.modFolders('images/' + json.image + '/Animation.json');
-				var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
+				var modAnimToFind:String = Paths.modFolders('images/' + json.image + '.json');
+				var animToFind:String = Paths.getPath('images/' + json.image + '.json', TEXT);
 				
 				//var modTextureToFind:String = Paths.modFolders("images/"+json.image);
 				//var textureToFind:String = Paths.getPath('images/' + json.image, new AssetType();
 				
 				if (FileSystem.exists(modAnimToFind) || FileSystem.exists(SUtil.getPath() + animToFind) || Assets.exists(animToFind))
 				#else
-				if (Assets.exists(Paths.getPath('images/' + json.image + '/Animation.json', TEXT)))
+				if (Assets.exists(Paths.getPath('images/' + json.image + '.json', TEXT)))
 				#end
 				{
 					spriteType = "texture";
